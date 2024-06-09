@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, beige 0%, #fad0c4 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .signup-link {
+            margin-top: 15px;
+        }
+
+        .signup-link a {
+            text-decoration: underline;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .social-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-login p {
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-buttons button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: none;
+        }
+
+
+        .social-login .google {
+            background-image: url('google.png');
+        }
+
+        .social-login .facebook {
+            background-image: url('fb-logo.jpg');
+        }
+
+        .social-login .x {
+            background-image: url('X logo.webp');
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            color: #343a40;
+            font-weight: bold;
+        }
+
+        .form-group label span {
+            margin-left: 5px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+        }
+
+        .modal-header,
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-title {
+            color: #343a40;
+        }
+
+        .close {
+            color: #343a40;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #ff6b81 0%, #ff5f91 100%);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #76b2fe 0%, #b69efe 100%);
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-info:hover {
+            background: linear-gradient(135deg, #699af9 0%, #a86efb 100%);
+        }
+
+        .btn-block {
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2 class="text-center mb-4">Expense Tracker</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">
+                    Username or Email <span>📧</span>
+                </label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="form-group position-relative">
+                <label for="password">
+                    Password <span>🔒</span>
+                </label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" required>
+                    <span class="input-group-append password-toggle" id="password-toggle">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <a href="#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login Now</button>
+        </form>
+        <div class="signup-link">
+            <p>Don't have an account? <a data-toggle="modal" data-target="#signupModal">Sign up</a></p>
+        </div>
+        <div class="social-login">
+            <p>Or join with</p>
+            <div class="social-buttons">
+                <button class="google" onclick="redirectToSocial('google')"></button>
+                <button class="facebook" onclick="redirectToSocial('facebook')"></button>
+                <button class="x" onclick="redirectToSocial('twitter')"></button>
+            </div>
+        </div>
+
+        <!-- Sign Up Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="signup-form">
+                            <div class="form-group">
+                                <label for="new-username">Username <span>👤</span></label>
+                                <input type="text" class="form-control" id="new-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-email">Email <span>📧</span></label>
+                                <input type="email" class="form-control" id="new-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Password <span>🔒</span></label>
+                                <input type="password" class="form-control" id="new-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Modal -->
+        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="forgot-password-form">
+                            <div class="form-group">
+                                <label for="reset-username-email">Username or Email <span>📧</span></label>
+                                <input type="text" class="form-control" id="reset-username-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reset-new-password">New Password <span>🔒</span></label>
+                                <input type="password" class="form-control" id="reset-new-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+
+            function redirectToSocial(platform) {
+                let url;
+                switch (platform) {
+                    case 'google':
+                        url = 'https://accounts.google.com/signin';
+                        break;
+                    case 'facebook':
+                        url = 'https://www.facebook.com/login';
+                        break;
+                    case 'twitter':
+                        url = 'https://twitter.com/login';
+                        break;
+                    default:
+                        return;
+                }
+                window.location.href = url;
+
+                handleRedirectAfterLogin(platform);
+            }
+
+            function handleRedirectAfterLogin(platform) {
+                if (loginSuccessful(platform)) {
+                    window.location.href = 'expenses.html';
+                } else {
+                    alert('Social login failed. Please try again.');
+                }
+            }
+
+            function loginSuccessful(platform) {
+                return true;
+            }
+
+            $(document).ready(function () {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+
+                function validatePassword(password) {
+                    const minLength = 8;
+                    const hasUpperCase = /[A-Z]/.test(password);
+                    const hasLowerCase = /[a-z]/.test(password);
+                    const hasNumber = /[0-9]/.test(password);
+                    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                    return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+                }
+
+                $('#login-form').on('submit', function (event) {
+                    event.preventDefault();
+                    const username = $('#username').val();
+                    const password = $('#password').val();
+
+                    const user = users.find(user => (user.username === username || user.email === username) && user.password === password);
+
+                    if (user) {
+                        alert("Login successful!");
+                        window.location.href = "expenses.html"; // Redirect to the expense tracker page
+                    } else {
+                        alert("Invalid username or password.");
+                    }
+                });
+
+                $('#signup-form').on('submit', function (event) {
+                    event.preventDefault();
+                    const newUsername = $('#new-username').val();
+                    const newEmail = $('#new-email').val();
+                    const newPassword = $('#new-password').val();
+
+                    const userExists = users.some(user => user.username === newUsername || user.email === newEmail);
+
+                    if (userExists) {
+                        alert("Username or email already exists.");
+                    } else if (!validatePassword(newPassword)) {
+                        alert("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                    } else {
+                        users.push({ username: newUsername, email: newEmail, password: newPassword });
+                        localStorage.setItem('users', JSON.stringify(users));
+                        alert("Sign up successful! Your record has been saved.");
+                        $('#signupModal').modal('hide');
+                    }
+                });
+
+                $('#forgot-password-form').on('submit', function (event) {
+                    event.preventDefault();
+                    const resetUsernameEmail = $('#reset-username-email').val();
+                    const resetNewPassword = $('#reset-new-password').val();
+
+                    const userIndex = users.findIndex(user => user.username === resetUsernameEmail || user.email === resetUsernameEmail);
+
+                    if (userIndex !== -1) {
+                        if (!validatePassword(resetNewPassword)) {
+                            alert("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                        } else {
+                            users[userIndex].password = resetNewPassword;
+                            localStorage.setItem('users', JSON.stringify(users));
+                            alert("Password reset successful!");
+                            $('#forgotPasswordModal').modal('hide');
+                        }
+                    } else {
+                        alert("No account found with the provided username or email.");
+                    }
+                });
+
+                // Password visibility toggle
+                $('#password-toggle').click(function () {
+                    const passwordInput = $('#password');
+                    const icon = $(this).find('i');
+
+                    if (passwordInput.attr('type') === 'password') {
+                        passwordInput.attr('type', 'text');
+                        icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                        setTimeout(function () {
+                            passwordInput.attr('type', 'password');
+                            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                        }, 2000); // Hide password after 2 seconds
+                    } else {
+                        passwordInput.attr('type', 'password');
+                        icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                    }
+                });
+            });
+
+        </script>
+</body>
+
+</html>
