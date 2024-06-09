@@ -1,2 +1,58 @@
 # Expenses-App
 STIW2044 ASSIGNMENT II
+
+Instructions for Using the Expenses App
+
+Thank you for downloading our Expenses App! Below are step-by-step instructions on how to set it up and start using it on your PC or laptop, as well as on your Android and iOS devices.
+
+For PC or Laptop (Windows/Mac):
+
+1. Unzip the Folder:
+      1.1 First, unzip the downloaded folder containing the app files.
+2. Open Visual Studio Code:
+      2.1 If you don't have Visual Studio Code installed, you can download it from [here](https://code.visualstudio.com/).
+      2.2 Once installed, open Visual Studio Code on your device.
+3. Open the Project Folder:
+      3.1 In Visual Studio Code, go to File > Open Folder.
+      3.2 Navigate to the unzipped folder containing the app files and select it.
+4. Run the App:
+      4.1 Within Visual Studio Code, locate the `index.html` file in the file explorer.
+      4.2 Right-click on `index.html` and select "Open with Live Server" (if you have the Live Server extension installed) or simply open it with your default web browser.
+         4.2.1 Note: If the app does not run in VS Code, don't worry! Try this alternative method:
+         4.2.3 Zip the unzipped folder again.
+         4.2.4 Open the zipped folder and double-click on the `index.html` file to open it directly in your web browser.
+         4.2.4 The app should now load in your web browser, and you can start using it!
+
+For Android:
+
+1. Download APK File:
+   1.1 On your Android device, download the `.apk` file provided in the downloaded folder.
+2. Install the App:
+   2.1 Once downloaded, locate the `.apk` file in your device's file manager.
+   2.2 Tap on the `.apk` file to begin the installation process.
+   2.3 Follow the on-screen instructions to complete the installation.
+3. Open the App:
+   3.1 Once installed, you can find the app icon on your device's home screen or in the app drawer.
+   3.2 Tap on the app icon to open and start using the app!
+
+For iOS Simulator:
+
+1. Download iOS Simulator Build:
+   1.1 Ensure you have Xcode installed on your Mac. If not, you can download it from the Mac App Store.
+   1.2 Download the iOS Simulator Build folder provided in the downloaded zip folder.
+2. Open Xcode:
+   2.1 Open Xcode on your Mac.
+3. Open the Project Folder:
+   3.1 In Xcode, go to File > Open.
+   3.2 Navigate to the iOS Simulator Build folder and select it.
+4. Run the App:
+   4.1 Within Xcode, locate the `.xcodeproj` file or `.xcworkspace` file in the iOS Simulator Build folder.
+   4.2 Double-click on the file to open the project in Xcode.
+   4.3 Select a simulator from the top-left corner of Xcode's toolbar.
+   4.4 Click the play button (▶︎) to build and run the app on the selected simulator.
+5. Use the App:
+   5.1 The app should now launch within the iOS simulator, and you can start using it just like you would on a physical iOS device.
+
+Note: Since iOS Simulator builds are meant for testing purposes and can't be directly installed on physical iOS devices, users can only run the app within the simulator environment provided by Xcode on a Mac.
+
+Note: If you encounter any issues during the installation or usage of the app, please feel free to reach out to us for assistance!
